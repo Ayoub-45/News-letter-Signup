@@ -1,11 +1,10 @@
 const express=require("express")
 const bodyParser=require("body-parser")
-const request=require("request");
 const https=require("https");
 const app=express();
 app.use(bodyParser.urlencoded({extended:true}))
 app.get("/",function(req,res){
-    res.sendFile(__dirname+"/dist/index.html")
+    res.sendFile(__dirname+"/index.html")
 })
 
 app.post("/",function(req,res){
@@ -32,13 +31,13 @@ app.post("/",function(req,res){
     }
  const request= https.request(url,options,function(response){
         if (response.statusCode===200){
-            res.sendFile(__dirname+"/dist/success.html")
+            res.sendFile(__dirname+"/success.html")
             res.on("data",function(data){
                 console.log(JSON.parse(data))
             })
         }
         else{
-            response.sendFile(__dirname+"/dist/failure.html")
+            response.sendFile(__dirname+"/failure.html")
         }
     })
     request.write(jsonData);
